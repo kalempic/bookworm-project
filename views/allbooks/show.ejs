@@ -5,20 +5,20 @@
 <div class="row">
     <div class="col-4 ">
         <div class="card mb-3">
-            <img src="<%= books.image%>" class="card-img-top" alt="...">
+            <img src="/<%= book.image%>" class="card-img-top" alt="">
             <div class="card-body">
-                <h5 class="card-title"><%= books.title%></h5>
-                <p class="card-text"><%= books.description%></p>
+                <h5 class="card-title"><%= book.title%></h5>
+                <p class="card-text"><%= book.description%></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-muted"><%= books.genre%></li>
-                <li class="list-group-item">Submitted by <%= books.author.username%></li>
-                <li class="list-group-item"><%= books.price%>RSD</li>
+                <li class="list-group-item text-muted"><%= book.genre%></li>
+                <li class="list-group-item">Submitted by <%= book.author.username%></li>
+                <li class="list-group-item"><%= book.price%>RSD</li>
             </ul>
-            <%  if( currentUser && books.author.equals(currentUser._id))  {%>
+            <%  if( currentUser && book.author.equals(currentUser._id))  {%>
             <div class="card-body">
-                <a class="card-link btn btn-info" href="/allbooks/<%=books._id%>/edit">Edit</a>
-                <form class="d-inline" action="/allbooks/<%=books._id%>?_method=DELETE" method="POST">
+                <a class="card-link btn btn-info" href="/allbooks/<%=book._id%>/edit">Edit</a>
+                <form class="d-inline" action="/allbooks/<%=book._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
@@ -32,7 +32,7 @@
     <div class="col-6">
         <% if(currentUser){ %>
         <h2>Leave a review</h2>
-        <form action="/allbooks/<%=books._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+        <form action="/allbooks/<%=book._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
             <!--  <div class="mb-3">
                  <label class="form-label" for="rating">Rating</label>
                  <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
@@ -61,7 +61,7 @@
             <button class="btn btn-success">Submit</button>
         </form>
         <% } %>
-        <% for(let review of books.reviews) { %>
+        <% for(let review of book.reviews) { %>
             <div class="card mb-3 ">
                 <div class="card-body">
                     <h5 class="card-title"> <%= review.author.username%></h5>
@@ -71,7 +71,7 @@
                     <!--    <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username%></h6>-->
                     <p class="card-text">Review: <%= review.body %></p>
                     <%  if( currentUser && review.author.equals(currentUser._id))  {%>
-                    <form action="/allbooks/<%=books._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                    <form action="/allbooks/<%=book._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>
                     <% } %>

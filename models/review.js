@@ -9,3 +9,5 @@ const reviewSchema = new Schema({
         ref: 'User'
     }
 });
+
+module.exports = mongoose.model("Review", reviewSchema);

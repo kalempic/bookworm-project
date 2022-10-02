@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const bookscontrol = require('../controllers/bookscontrol');
-const catchAsync = require('../helpers/CatchAsync');
+const bookscontrol = require('../controllers/books');
+const catchAsync = require('../helpers/catchAsync');
 const Books = require('../models/books');
-const {isLoggedIn, isAuthor, validateBooks} = require('../middleware');
+const {isLoggedIn, isAuthor, validateBook} = require('../middleware');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,19 +15,22 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + '.' + extension)
     }
 })
-// const upload = multer({ dest: 'uploads/' });
 const upload = multer({storage: storage});
 
 
 router.route('/')
     .get(isLoggedIn, catchAsync(bookscontrol.index))
-    .post(isLoggedIn, upload.single('image'), validateBooks, catchAsync(bookscontrol.createBook));
+    // .post(isLoggedIn, validateBook, catchAsync(bookscontrol.createBook));
+    // .post(isLoggedIn, upload.single('image'), validateBook, catchAsync(bookscontrol.createBook));
+    .post(isLoggedIn, upload.single('image'), catchAsync(bookscontrol.createBook));
+// .post(isLoggedIn, catchAsync(bookscontrol.createBook));
 
 router.get('/new', isLoggedIn, bookscontrol.renderNewForm);
 
 router.route('/:id')
     .get(catchAsync(bookscontrol.showBook))
-    .put(isLoggedIn, isAuthor,upload.single('image'), validateBooks, catchAsync(bookscontrol.updateBook))
+    .put(isLoggedIn, isAuthor, upload.single('image'), validateBook, catchAsync(bookscontrol.updateBook))
+    // .put(isLoggedIn, validateBook, catchAsync(bookscontrol.updateBook))
     .delete(isLoggedIn, isAuthor, catchAsync(bookscontrol.deleteBook));
 
 

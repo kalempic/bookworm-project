@@ -8,8 +8,9 @@ module.exports.createReview = async (req, res) => {
     book.reviews.push(review);
     await review.save();
     await book.save();
-    req.flash('success', 'Created new book!');
-    res.redirect(`/books/${book._id}`);
+    req.flash('success', 'Created new review!');
+    res.redirect(`/allbooks/${book._id}`);
+    // res.render('allbooks/show', { book });
 }
 
 module.exports.deleteReview = async (req, res) => {
@@ -17,5 +18,5 @@ module.exports.deleteReview = async (req, res) => {
     await Book.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
     req.flash('success', 'Successfully deleted review')
-    res.redirect(`/books/${id}`);
+    res.redirect(`/allbooks/${id}`);
 }

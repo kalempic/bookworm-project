@@ -3,17 +3,17 @@
 <div class="row">
     <h1 class="text-center">Edit book</h1>
     <div class="col-md-6 offset-md-3">
-        <form action="/allbooks/<%=books._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+        <form action="/allbooks/<%=book._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="books[title]"
-                       value="<%=books.title %>" required>
+                <input class="form-control" type="text" id="title" name="book[title]"
+                       value="<%=book.title %>" required>
                 <div class="valid-feedback">Looks good!</div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="genre">Genre</label>
-                <input class="form-control" type="text" id="genre" name="books[genre]"
-                       value="<%=books.genre %>" required>
+                <input class="form-control" type="text" id="genre" name="book[genre]"
+                       value="<%=book.genre %>" required>
                 <div class="valid-feedback">Looks good!</div>
             </div>
 
@@ -29,21 +29,21 @@
                 <div class="input-group">
                     <span class="input-group-text" id="price-label">RSD</span>
                     <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                           aria-describedby="price-label" name="books[price]" value="<%=books.price %>" required>
+                           aria-describedby="price-label" name="book[price]" value="<%=book.price %>" required>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description"
-                          name="books[description]" required><%= books.description%></textarea>
+                          name="book[description]" required><%= book.description%></textarea>
                 <div class="valid-feedback">Looks good!</div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Update book</button>
             </div>
         </form>
-        <a href="/allbooks/<%= books._id%>">Back to books</a>
+        <a href="/allbook/<%= book._id%>">Back to book</a>
     </div>
 </div>
 

@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const BookSchema = new Schema({
     title: String,
     description: String,
-    location: String,
+    price: String,
+    image:String,
+    genre:String,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
