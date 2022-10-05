@@ -20,17 +20,14 @@ const upload = multer({storage: storage});
 
 router.route('/')
     .get(isLoggedIn, catchAsync(bookscontrol.index))
-    // .post(isLoggedIn, validateBook, catchAsync(bookscontrol.createBook));
-    // .post(isLoggedIn, upload.single('image'), validateBook, catchAsync(bookscontrol.createBook));
-    .post(isLoggedIn, upload.single('image'), catchAsync(bookscontrol.createBook));
-// .post(isLoggedIn, catchAsync(bookscontrol.createBook));
+    .post(isLoggedIn, upload.single('image'), validateBook, catchAsync(bookscontrol.createBook));
+
 
 router.get('/new', isLoggedIn, bookscontrol.renderNewForm);
 
 router.route('/:id')
     .get(catchAsync(bookscontrol.showBook))
     .put(isLoggedIn, isAuthor, upload.single('image'), validateBook, catchAsync(bookscontrol.updateBook))
-    // .put(isLoggedIn, validateBook, catchAsync(bookscontrol.updateBook))
     .delete(isLoggedIn, isAuthor, catchAsync(bookscontrol.deleteBook));
 
 
